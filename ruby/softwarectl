@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+user_input = ARGV[0]
+filename = ARGV[1]
+
+if user_input.nil?
+  puts 'haga uso de la función --help'
+elsif user_input == '--help'
+  puts "
+        --help, mostrar esta ayuda.
+        --version, mostrar información sobre el autor del script
+                   y fecha de creacion.
+        --status FILENAME, comprueba si puede instalar/desintalar.
+        --run FILENAME, instala/desinstala el software indicado."
+elsif user_input == '--version'
+  puts "
+        Creado por: Marlon Farizo hergueta
+        fecha: 8 de Enero de 2020"
+elsif user_input == '--status'
+
+  
+elsif user_input == 4
+  puts "Adios"
+else
+  puts "Error"
+end

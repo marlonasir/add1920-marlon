@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+
+
+user_input = ARGV[0]
+filename = ARGV[1]
+
+def status(f_package)
+  check = `whereis #{f_package[0]} |grep bin |wc -l`.to_i
+    if check == 0
+      puts "#{f_package[0]} ->  (U) uninstalled"
+    elsif check == 1
+      puts "#{f_package[0]} ->  (I) installed"
+    end
+
+end
+
+def install(f_package)
+  check = `whereis #{f_package[0]} |grep bin |wc -l`.to_i
+  act = "#{f_package[1]}".to_s
+
+  if act == "install"
+    if check == 0
+      `apt-get install -y #{f_package[0]}`
+      puts "#{f_package[0]} -> (I) installed"
+    elsif check == 1
+      puts "#{f_package[0]} -> (I) ya está instalado"
+    end
+
+  elsif act == "remove"
+      if check == 1
+        `apt-get remove -y  #{f_package[0]}`
+        puts "#{f_package[0]} -> (U) uninstalled"
+      elsif check == 0
+        puts "#{f_package[0]} -> (U) no está instalado"
+      end
+  end
+end
+
+if user_input == '--help'
+  puts 'Usage:
+        systemctml [OPTIONS] [FILENAME]
+Options:
+        --help, mostrar esta ayuda.
+        --version, mostrar información sobre el autor del script
+                   y fecha de creación.
+        --status FILENAME, comprueba si puede instalar/desintalar.
+        --run FILENAME, instala/desinstala el software indicado.
+Description:
+        Este script se encarga de instalar/desinstalar
+        el software indicado en el fichero FILENAME.
+        Ejemplo de FILENAME:
+        tree:install
+        nmap:install
+        atomix:remove'
+
+elsif user_input == '--version'
+  puts "
+  Creado por: Marlon Farizo hergueta
+  fecha: 8 de Enero de 2020"
+
+elsif user_input == '--status'
+  lines = "cat #{filename}".split("\n")
+  lines.each do |a|
+    f_package = a.split(":")
+    status(f_package)
+  end
+
+elsif user_input.nil?
+  puts 'Haga uso del comando "--help" para ver la ayuda.'
+
+elsif user_input == '--run'
+  user = `id -u`.to_i
+
+  if user == 0
+    file = `cat #{filename}`
+    f_lines = file.split("\n")
+    f_lines.each do |a|
+      f_package = a.split(":")
+      install(f_package)
+    end
+
+  elsif user != 0
+    puts "Se necesita ser usuario root para ejecutar el script"
+    exit 1
+  end
+end
