@@ -4,7 +4,7 @@
 
 ![](img/bot2.4.png)
 
-## Comprobación tareas programables
+## 3.2 Comprobación tareas programables
 
 ![](img/bot3.2.png)
 
