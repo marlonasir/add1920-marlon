@@ -50,6 +50,10 @@ haremos que inicie desde nuestra imagen anterior
 
 Ahora haremos docker ps para ver el puerto al que se redirige y entraremos en el navegador con la url localhost:(puerto de redirección).
 
+![](img/verificacion3.2.png)
+
+![](img/verificacion3.2.2.png)
+
 ## 3.2 Migrar imagen a otra maquina
 
 Este comando nos permitira guardar la imagen a un .tar para poder exportarla a un compañero
@@ -99,7 +103,3 @@ En este paso haremos lo mismo que en el paso anterior, pero el fichero dockerfil
 Creamos un contenedor en otro directorio y usamos el comando indicado a continuación y se nos mostrara un mensaje en pantalla
 
 ![](img/dock28.PNG)
-
-## Aclaraciones
-
-Las comprobaciones relacionadas con nginx no las pude mostrar debido a un fallo que me impedía mostrar las comprobaciones en el navegador.
